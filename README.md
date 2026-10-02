@@ -11,7 +11,7 @@ This project is a geographic information system (GIS) designed to report and vis
 ## Tech Stack
 | Component | Technologies Used |
 | :--- | :--- |
-| **Frontend** | HTML, Leaflet.js |
+| **Frontend** | HTML, CSS, JavaScript, Leaflet.js |
 | **Backend Framework** | Python, FastAPI |
 | **Database Engine** | PostgreSQL hosted on Supabase |
 | **Spatial Integration** | PostGIS, SQLAlchemy, GeoAlchemy2, Shapely |
