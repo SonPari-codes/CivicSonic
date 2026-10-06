@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Suraksha - Emergency SOS</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+
+    <header class="app-header">
+      <button class="hamburger-btn" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <a class="brand" href="../HOME PAGE/index.html" aria-label="Suraksha Home">
+        <img src="../assets/logo.png" alt="Suraksha Logo">
+      </a>
+    </header>
+
+    <main class="sos-main">
+      <button type="button" class="sos-button" id="sosButton" aria-label="Double click to send emergency alert">
+        <span>SOS</span>
+      </button>
+
+      <p class="sos-instruction">Tap to send emergency alert</p>
+    </main>
+
+    <div class="success-modal" id="successModal" aria-hidden="true">
+      <div class="modal-backdrop"></div>
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
+        <div class="check-icon">✓</div>
+        <h2 id="helpTitle">Help is on the way!</h2>
+        <p>Your emergency alert has been activated.</p>
+        <button type="button" id="closeModal">OK</button>
+      </div>
+    </div>
+
+    <nav class="bottom-nav" aria-label="Primary navigation">
+      <a href="../REPORT PAGE/index.html" class="bottom-nav-item">
+        <span class="nav-icon"><img src="../assets/nav-report.png" alt="Report"></span>
+        <span>Report</span>
+      </a>
+
+      <a href="../VIEW LIVE MAP PAGE/index.html" class="bottom-nav-item">
+        <span class="nav-icon"><img src="../assets/nav-map.png" alt="View Map"></span>
+        <span>View Map</span>
+      </a>
+
+      <a href="../HOME PAGE/index.html" class="bottom-nav-item">
+        <span class="nav-icon"><img src="../assets/nav-home.png" alt="Home"></span>
+        <span>Home</span>
+      </a>
+
+      <a href="tel:112" class="bottom-nav-item emergency">
+        <span class="nav-icon"><img src="../assets/nav-emergency.png" alt="Emergency"></span>
+        <span>Emergency</span>
+      </a>
+
+      <a href="#" class="bottom-nav-item" id="profileLink">
+        <span class="nav-icon"><img src="../assets/nav-profile.png" alt="Profile"></span>
+        <span>Profile</span>
+      </a>
+    </nav>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

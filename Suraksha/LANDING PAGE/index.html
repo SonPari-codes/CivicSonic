@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Suraksha - Your Safety, Our Priority</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="app-container">
+
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-left">
+        <button class="hamburger-btn" aria-label="Open menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <div class="brand">
+         <img src="../assets/logo.png" alt="Suraksha Logo" class="brand-logo">
+          <span class="brand-name">Suraksha</span>
+        </div>
+      </div>
+
+      <nav class="desktop-nav landing-desktop-nav" aria-label="Primary navigation">
+        <a href="index.html" class="desktop-nav-item active">Home</a>
+        <a href="../LOGIN PAGE/index.html" class="desktop-nav-item">Report</a>
+        <a href="../live-map/index.html" class="desktop-nav-item">Live Map</a>
+        <a href="../LOGIN PAGE/index.html" class="desktop-nav-item emergency-link">Emergency</a>
+        <a href="../LOGIN PAGE/index.html" class="desktop-nav-item">Profile</a>
+    </nav>
+
+      <div class="header-right">
+        <a class="login-btn" href="../LOGIN PAGE/index.html">LOGIN</a>
+
+        <button class="icon-btn" aria-label="Search">
+          <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+            <circle cx="11" cy="11" r="7"/>
+            <line x1="20" y1="20" x2="16" y2="16"/>
+          </svg>
+        </button>
+
+        <button class="icon-btn" aria-label="Notifications">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+          </svg>
+        </button>
+      </div>
+    </header>
+<!-- Main Content -->
+    <main class="main-content">
+
+      <!-- Hero Section -->
+      <section class="hero-section">
+        <div class="hero-text-col">
+          <h1 class="hero-title">YOUR SAFETY,<br>OUR PRIORITY.</h1>
+          <p class="hero-subtitle">Report emergencies in real time, alert nearby users and help authorities respond faster.</p>
+
+          <div class="hero-buttons">
+            <a class="btn-emergency figma-btn-red-shadow" href="../LOGIN PAGE/index.html">
+              <span class="icon-circle">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2a6 6 0 0 0-6 6v3.586l-.707.707A1 1 0 0 0 6 14h12a1 1 0 0 0 .707-1.707L18 11.586V8a6 6 0 0 0-6-6zm0 16a2 2 0 0 1-2-2h4a2 2 0 0 1-2 2z"/>
+                </svg>
+              </span>
+              <span>Report Emergency</span>
+            </a>
+
+            <a href="../live-map/index.html" class="btn-view-map figma-btn-white-shadow">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+                <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/>
+                <line x1="8" y1="2" x2="8" y2="18"/>
+                <line x1="16" y1="6" x2="16" y2="22"/>
+              </svg>
+              <span>View Live Map</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-image-col">
+          <img src="../assets/hero-graphic.png" alt="City Skyline" class="hero-img">
+        </div>
+      </section>
+
+      <!-- Live Safety Map Container -->
+      <section class="map-section">
+        <h2 class="section-title">Live Safety Map</h2>
+
+        <div id="map-container" class="map-container figma-map-shadow">
+          <img src="../assets/map-preview.png" alt="Map View" class="map-bg-img">
+          
+        </div>
+      </section>
+
+      <!-- How Suraksha Works -->
+      <section class="workflow-section">
+        <h2 class="section-title">How Suraksha Works</h2>
+
+        <!-- Report -->
+        <a href="../LOGIN PAGE/index.html" class="info-card figma-card-shadow">
+          <div class="card-icon">
+           <img src="../assets/report-icon.png" alt="Report"> 
+          </div>
+
+          <div class="card-text">
+            <h4 class="color-report">REPORT</h4>
+            <p>Report an incident with your location.</p>
+          </div>
+        </a>
+
+        <!-- Alert -->
+        <a href="../LOGIN PAGE/index.html" class="info-card figma-card-shadow">
+          <div class="card-icon">
+            <img src="../assets/alert-icon.png" alt="Alert">
+          </div>
+
+          <div class="card-text">
+            <h4 class="color-alert">ALERT</h4>
+            <p>Nearby users and authorities are alerted.</p>
+          </div>
+        </a>
+
+        <!-- Respond -->
+        <a href="../LOGIN PAGE/index.html" class="info-card figma-card-shadow">
+          <div class="card-icon">
+            <img src="../assets/respond-icon.png" alt="Respond">
+          </div>
+
+          <div class="card-text">
+            <h4 class="color-respond">RESPOND</h4>
+            <p>Authorities can track and respond quickly.</p>
+          </div>
+        </a>
+
+        <!-- SOS -->
+        <a href="../LOGIN PAGE/index.html" class="sos-card figma-sos-shadow">
+          <div class="sos-badge">SOS</div>
+
+          <div class="sos-text">
+            <h3>EMERGENCY SOS</h3>
+            <p>get immediate help</p>
+          </div>
+        </a>
+
+      </section>
+    </main>
+
+    <!-- Responsive navigation: bottom on mobile, hidden on desktop -->
+    <nav class="bottom-nav" aria-label="Primary navigation">
+        <a href="../LOGIN PAGE/index.html" class="bottom-nav-item">
+    <span class="nav-icon">
+        <img src="../assets/nav-report.png" alt="Report">
+    </span>
+    <span>Report</span>
+</a>
+
+<a href="../live-map/index.html" class="bottom-nav-item">
+    <span class="nav-icon">
+        <img src="../assets/nav-map.png" alt="View Map">
+    </span>
+    <span>View Map</span>
+</a>
+
+<a href="index.html" class="bottom-nav-item active">
+    <span class="nav-icon">
+        <img src="../assets/nav-home.png" alt="Home">
+    </span>
+    <span>Home</span>
+</a>
+
+<a href="../LOGIN PAGE/index.html" class="bottom-nav-item emergency">
+    <span class="nav-icon">
+        <img src="../assets/nav-emergency.png" alt="Emergency">
+    </span>
+    <span>Emergency</span>
+</a>
+
+<a href="../LOGIN PAGE/index.html" class="bottom-nav-item">
+    <span class="nav-icon">
+        <img src="../assets/nav-profile.png" alt="Profile">
+    </span>
+    <span>Profile</span>
+</a>
+    </nav>
+
+  </div>
+
+</body>
+</html>

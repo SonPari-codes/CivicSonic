@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meerut Locality Map | Interactive Interface</title>
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <style>
+        /* Reset and Full-Screen Layout */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            background-color: #f0f2f5;
+        }
+
+        #map {
+            height: 100vh;
+            width: 100vw;
+            z-index: 1;
+        }
+
+        /* Clean Zoom Control Styling */
+        .leaflet-control-zoom {
+            border: none !important;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
+        }
+
+        /* Custom Marker CSS (Reserved for future data injection) */
+        .incident-marker {
+            transition: transform 0.2s ease-in-out;
+        }
+        .incident-marker:hover {
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- The Map Canvas -->
+    <div id="map"></div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script>
+        /**
+         * FRONTEND / BACKEND API DATA BRIDGE
+         * This object remains globally exposed so your team can 
+         * inject data later without touching the map logic.
+         */
+        window.CrimeMapBridge = {
+            map: null,
+            activeLayer: null,
+
+            // 1. Initialize the Plain Meerut Map
+            init: function() {
+                // Centered on Meerut: Civil Lines, Shastri Nagar, Sadar Bazaar area
+                this.map = L.map('map', {
+                    zoomControl: true,
+                    attributionControl: true
+                }).setView([28.9845, 77.7064], 13);
+
+                // Bright, high-detail OpenStreetMap tiles
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    maxZoom: 19,
+                    attribution: '© OpenStreetMap contributors'
+                }).addTo(this.map);
+
+                // Prepare a dedicated layer for future data
+                this.activeLayer = L.layerGroup().addTo(this.map);
+
+                console.log("Map Engine: Meerut Locality View Initialized (Bright Theme)");
+            },
+
+            // 2. Data Rendering Method (Call this when you have real data)
+            loadDynamicBackendData: function(incomingJsonArray) {
+                if (!incomingJsonArray || !Array.isArray(incomingJsonArray)) return;
+                
+                this.activeLayer.clearLayers();
+                
+                incomingJsonArray.forEach(item => {
+                    const color = this._getSeverityColor(item.severity);
+                    
+                    const icon = L.divIcon({
+                        className: 'incident-marker',
+                        html: `<svg width="24" height="24" viewBox="0 0 24 24" fill="${color}" stroke="white" stroke-width="2">
+                                <circle cx="12" cy="12" r="10" />
+                               </svg>`,
+                        iconSize: [24, 24]
+                    });
+
+                    L.marker([item.lat, item.lng], { icon: icon })
+                     .bindPopup(`<b>${item.type}</b><br>${item.locName}`)
+                     .addTo(this.activeLayer);
+                });
+            },
+
+            // 3. Async Fetch Template
+            fetchLiveDatabasePayload: async function(apiUrl) {
+                try {
+                    const response = await fetch(apiUrl);
+                    const data = await response.json();
+                    this.loadDynamicBackendData(data);
+                } catch (error) {
+                    console.error("Bridge Error:", error);
+                }
+            },
+
+            _getSeverityColor: function(severity) {
+                const map = { High: '#ff4d4d', Medium: '#ffa500', Low: '#ffcc00' };
+                return map[severity] || '#3388ff';
+            }
+        };
+
+        // Start Map on Load
+        document.addEventListener('DOMContentLoaded', () => {
+            window.CrimeMapBridge.init();
+        });
+    </script>
+</body>
+</html>

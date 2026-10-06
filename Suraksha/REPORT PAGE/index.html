@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Suraksha - Report an Incident</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <header class="app-header">
+      <div class="header-left">
+        <button class="hamburger-btn" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+        <a class="brand" href="../HOME PAGE/index.html" aria-label="Suraksha Home">
+          <img src="../assets/logo.png" alt="Suraksha Logo" class="brand-logo">
+          <span class="brand-name">Suraksha</span>
+        </a>
+      </div>
+
+      <nav class="desktop-nav" aria-label="Primary navigation">
+        <a href="../HOME PAGE/index.html" class="desktop-nav-item">Home</a>
+        <a href="index.html" class="desktop-nav-item active">Report</a>
+        <a href="../VIEW LIVE MAP PAGE/index.html" class="desktop-nav-item">Live Map</a>
+        <a href="tel:112" class="desktop-nav-item emergency-link">Emergency</a>
+        <a href="#" class="desktop-nav-item" id="profileLink">Profile</a>
+      </nav>
+
+      <div class="header-right">
+        <button class="icon-btn" aria-label="Search">
+          <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+            <circle cx="11" cy="11" r="7"/><line x1="20" y1="20" x2="16" y2="16"/>
+          </svg>
+        </button>
+        <button class="icon-btn" aria-label="Notifications">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <h1 class="page-title">REPORT AN INCIDENT</h1>
+
+      <form id="reportForm" novalidate>
+        <section class="form-section">
+          <label for="incidentType">1. Incident Type</label>
+          <div class="select-wrap">
+            <select id="incidentType" name="incidentType" required>
+              <option value="" selected disabled>Enter incident type</option>
+              <option>Crime</option>
+              <option>Accident</option>
+              <option>Fire</option>
+              <option>Medical Emergency</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </section>
+
+        <section class="form-section">
+          <label>2. Priority Type</label>
+          <div class="priority-row" role="radiogroup" aria-label="Priority Type">
+            <label class="priority low"><input type="radio" name="priority" value="Low" required><span class="priority-dot"></span>Low</label>
+            <label class="priority medium"><input type="radio" name="priority" value="Medium"><span class="priority-dot"></span>Medium</label>
+            <label class="priority high"><input type="radio" name="priority" value="High"><span class="priority-dot"></span>High</label>
+            <label class="priority emergency"><input type="radio" name="priority" value="Emergency"><span class="priority-dot"></span>Emergency</label>
+          </div>
+        </section>
+
+        <section class="form-section">
+          <label for="description">3. Description</label>
+          <textarea id="description" name="description" placeholder="Describe what happened..." required></textarea>
+        </section>
+
+        <section class="form-section">
+          <label for="evidence">4. Attach Evidence</label>
+          <div class="file-input-wrap">
+            <input type="file" id="evidence" name="evidence" accept="image/*,video/*,.pdf">
+            <label for="evidence" class="file-label" id="fileLabel">Upload attachment here...</label>
+          </div>
+        </section>
+
+        <section class="form-section location-section">
+          <label>5. Location</label>
+          <button type="button" class="location-current" id="currentLocationBtn">
+            <span class="pin-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/>
+              </svg>
+            </span>
+            <span class="location-copy"><strong id="locationTitle">Choose my current location</strong><small id="locationStatus">Location detected automatically</small></span>
+          </button>
+
+          <button type="button" class="choose-map-btn" id="chooseMapBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 5l5-2 6 2 5-2v16l-5 2-6-2-5 2V5Z"/><path d="M9 3v16M15 5v16"/>
+            </svg>
+            <span>Choose on map</span>
+          </button>
+
+          <div class="map-box" aria-label="Location map preview" style="position: relative; z-index: 1;">
+             <div id="interactiveMap" style="height: 100%; width: 100%;"></div>
+          </div>
+          <p class="detected-location">Location: <strong id="locationValue">Automatically detected</strong></p>
+        </section>
+
+        <div class="form-actions">
+          <button type="button" class="cancel-btn" id="cancelBtn">Cancel</button>
+          <button type="submit" class="submit-btn">Submit</button>
+        </div>
+      </form>
+    </main>
+
+    <!-- Report submitted success popup -->
+    <div class="success-modal" id="successModal" aria-hidden="true">
+      <div class="success-modal-backdrop"></div>
+      <div class="success-modal-card" role="dialog" aria-modal="true" aria-labelledby="successTitle">
+        <div class="success-icon">✓</div>
+        <h2 id="successTitle">Report Submitted Successfully!</h2>
+        <p>Your incident report has been submitted successfully.</p>
+        <button type="button" class="back-home-btn" id="backHomeBtn">Back to Home</button>
+      </div>
+    </div>
+
+    <nav class="bottom-nav" aria-label="Primary navigation">
+      <a href="index.html" class="bottom-nav-item active">
+        <span class="nav-icon"><img src="../assets/nav-report.png" alt="Report"></span>
+        <span>Report</span>
+      </a>
+      <a href="../VIEW LIVE MAP PAGE/index.html" class="bottom-nav-item">
+        <span class="nav-icon"><img src="../assets/nav-map.png" alt="View Map"></span>
+        <span>View Map</span>
+      </a>
+      <a href="../HOME PAGE/index.html" class="bottom-nav-item">
+        <span class="nav-icon"><img src="../assets/nav-home.png" alt="Home"></span>
+        <span>Home</span>
+      </a>
+      <a href="tel:112" class="bottom-nav-item emergency">
+        <span class="nav-icon"><img src="../assets/nav-emergency.png" alt="Emergency"></span>
+        <span>Emergency</span>
+      </a>
+      <a href="#" class="bottom-nav-item" id="mobileProfileLink">
+        <span class="nav-icon"><img src="../assets/nav-profile.png" alt="Profile"></span>
+        <span>Profile</span>
+      </a>
+    </nav>
+  </div>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
